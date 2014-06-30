@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+
+{% block nav_publish %}
+<li><a href="{{ url_for('ol_publish_status') }}" class="btn btn-success btn-sm" role="button">Show Programs Publish
+    Status</a></li>
+{% endblock %}
+
+
+{% block content %}
+<h2>Show ProgramS</h2>
+<div class="row">
+    {% if programs %}
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            {% for p in programs %}
+            <form role="form" method="post" action="{{ url_for('ol_publish_status_tasks') }}">
+            <div class="panel-heading">
+                {% for i in p.program_name %}
+                <h3 class="panel-title">{{ i }}</h3>
+                {% endfor %}
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="submit "class="btn btn-default" name="program_id" value="{{ p.program_id }}">{{ p.program_id}}</button>
+                    </span>
+                </div>
+            </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if publish_list %}
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            {% for p in publish_list %}
+            <form role="form" method="post" action="{{ url_for('ol_publish_status_terminals') }}">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ p.publisher}}</h3>
+            </div>
+            <div class="panel-body">
+                <p>publish_id  {{ p.publish_id }}</p>
+                {% for t in p.terminals %}
+                <input type="checkbox" name="clientmac" value="{{ t.clientmac }}">terminal's mac:{{ t.clientmac }}
+                <p>schedule {{ t.schedule }}</p>
+                {% endfor %}
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="submit "class="btn btn-default" name="publish_id" value="{{ p.publish_id }}">{{ p.publish_time}}</button>
+                    </span>
+                    <span class="input-group-btn">
+                        <a href="/program/publish_status/delete?publish_id={{ p.publish_id }}" type="button">删除</a>
+                    </span>
+                </div>
+            </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if terminals_list %}
+    <div class="col-md-4">
+            <div class="col-md-4">
+        <div class="panel panel-default">
+            {% for t in terminals_list %}
+            <form role="form" method="post" action="{{ url_for('ol_publish_status_terminals') }}">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ t.clientmac }}</h3>
+            </div>
+            <div class="panel-body">
+                        <button type="submit "class="btn btn-default" name="clientmac" value="{{ t.clientmac }}">{{ t.schedule }}</button>
+                </div>
+            </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock%}

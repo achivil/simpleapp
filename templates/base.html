@@ -1,0 +1,78 @@
+<html>
+    <!-- 最新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script src="{{ url_for('static', filename='jquery-1.10.2.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery-ui-1.10.4.custom.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jquery-ui-1.10.4.custom.min.css') }}">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <title>NiDS-Page</title>
+
+    <head>
+    <div class="container">
+        <h1>Test NIDSweb</h1>
+    </div>
+    </head>
+
+    <body>
+    <div class="container">
+    <h1>This page is just for test on webplatform</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-danger alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    {% if session.username %}
+    <ul class="nav nav-tabs">
+        {% block nav_userinfo %}
+        <li><a href="{{ url_for('ol_login') }}" class="btn btn-info btn-sm" role="button">User Info</a></li>
+        {% endblock %}
+        {% block nav_programs %}
+        <li><a href="{{ url_for('ol_program') }}" class="btn btn-info btn-sm" role="button">show all programs</a></li>
+        {% endblock %}
+        {% block nav_nse_simple_programs %}
+        <li><a href="{{ url_for('new_program_manager.get_nse_programs') }}" class="btn btn-info btn-sm" role="button">show nse programs simple</a></li>
+        {% endblock %}
+        {% block nav_resources %}
+        <li><a href="{{ url_for('new_resource_handler.show_resources') }}" class="btn btn-info btn-sm" role="button">show all resource</a></li>
+        {% endblock %}
+        {% block nav_publish %}
+        <li><a href="{{ url_for('ol_publish_status') }}" class="btn btn-info btn-sm" role="button">show publish status</a></li>
+        {% endblock %}
+        {% if session.system == "NSE" %}
+        {% block nav_systems %}
+        <li><a href="{{ url_for('subsystem_manager.show_subsystem_simple') }}" class="btn btn-info btn-sm" role="button">show all systems</a></li>
+        {% endblock %}
+        {% block nav_create_system %}
+        <li><a href="{{ url_for('ol_system_newone') }}" class="btn btn-info btn-sm" role="button">create new system</a></li>
+        {% endblock %}
+        {% endif %}
+        {% block nav_logs %}
+        <li><a href="{{ url_for('ol_loggingmanage_user') }}" class="btn btn-info btn-sm" role="button">users logs</a></li>
+        {% endblock %}
+        {% block nav %}
+        {% endblock %}
+
+        {% if session.username %}
+        <li><a href="{{ url_for('ol_logout') }}" class="btn btn btn-danger btn-sm active" role="button">Logout</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+    <body>
+    {% block content %}
+        <p>This is base template</p>
+    {% endblock %}
+    </div>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block nav_nse_simple_programs %}
+    <li><a href="{{ url_for('new_program_manager.get_nse_programs') }}" class="btn btn-success btn-sm" role="button">show NSE programs simple Info</a></li>
+{% endblock %}
+
+
+{% block content %}
+<h2>Show ProgramS Simple</h2>
+  {% for info in simple_programs_info %}
+  <div class="container">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">{{ info.programname }}</h3>
+          </div>
+      <div class="panel-body">
+          <ul class="list-unstyled">
+              <li><p class="lead">Program ID: {{ info._id}}</p></li>
+              <li><p class="lead">Program belong to: {{ info.system }}</p></li>
+          </ul>
+      </div>
+      </div>
+  </div>
+  {% endfor %}
+{% endblock%}

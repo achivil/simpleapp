@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block nav_userinfo %}
+    <li><a href="{{ url_for('ol_login') }}" class="btn btn-success btn-sm" role="button">User Info</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="jumbotron">
+    <ul class="list-unstyled">
+        <li>用户名: {{ user.username }}</li>
+        <li>用户身份: {% if user.role == 3 %}九星管理员{% else %}普通用户{% endif %}</li>
+        <li>归属系统: {{ user.system }}</li>
+    </ul>
+</div>
+{% endblock%}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+{% block nav_programs %}
+    <li><a href="{{ url_for('ol_program') }}" class="btn btn-success btn-sm" role="button">show all programs</a></li>
+{% endblock %}
+
+
+{% block content %}
+<h2>Show ProgramS</h2>
+    <div class="container">
+        <a href="#" class="btn btn-default btn-lg activate" role="button">Create New</a>
+    </div>
+
+  {% for info in programs_info %}
+  <div class="container">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">{{ info.programname }}</h3>
+          </div>
+      <div class="panel-body">
+          <ul class="list-unstyled">
+              <li><p class="lead">Program ID: {{ info._id}}</p></li>
+              <li><p class="lead">Program state: {{ info.programpublishstate }}</p></li>
+              <li><p class="lead">Programalivetime: {{ info.programupdateman }}</p></li>
+              <li><p class="lead">Program belong to: {{ info.system }}</p></li>
+          </ul>
+          <form action="/program/publish" method=post class="form-horizontal" role="form">
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                      <div class="form-group">
+                          <label for="input" class="col-sm-2 control-label">节目</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="input" value="{{ info._id }}" placeholder="{{ info._id }}" name=program_id>
+                          </div>
+                          <label for="input" class="col-sm-2 control-label">grouplist</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="input" placeholder="grouplist" name=grouplist>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                      <h3>CHOOSE PROGRAMS</h3>
+                      {% for client in clients %}
+                      {{ client.clientname }}
+                      {{ client.clientip }}
+                      {{ client.clientmac }}
+                      <input type="checkbox" name=onemac value="{{ client.clientmac }}"/>
+                      {% endfor %}
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-sm-offset-8 col-sm-10">
+                      <button type=submit class="btn btn-default">发布</button>
+                  </div>
+              </div>
+          </form>
+          <div class="btn-group">
+              <a href="#" class="btn btn-primary active" role="button">Edit</a>
+              <a href="/program/{{ info._id }}/publish" class="btn btn-primary active" role="button">Publish</a>
+              <a href="#" class="btn btn-primary active" role="button">Delete</a>
+              <a href="#" class="btn btn-primary active" role="button">empty</a>
+          </div>
+      </div>
+      </div>
+  </div>
+  {% endfor %}
+{% endblock%}

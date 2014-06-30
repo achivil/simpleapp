@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{{ url_for('ol_login') }}" method=post class="form-horizontal" role="form">
+    <div class="form-group">
+    <label for="input" class="col-sm-2 control-label">UserName</label>
+    <div class="col-sm-5">
+        <input type="text" class="form-control" id="input" placeholder="UserName" name=username>
+    </div>
+    </div>
+    <div class="form-group">
+    <label for="input" class="col-sm-2 control-label">PassWord</label>
+    <div class="col-sm-5">
+        <input type="password" class="form-control" id="input" placeholder="PassWord" name=password>
+    </div>
+    </div>
+    <div class="input-group">
+
+    <div class="form-group">
+    <div class="col-sm-offset-8 col-sm-10">
+        <button type=submit class="btn btn-default">Sign In</button>
+    </div>
+    </div>
+</form>
+{% endblock%}

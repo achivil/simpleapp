@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block nav_logs %}
+        <li><a href="{{ url_for('ol_loggingmanage_user') }}" class="btn btn-success btn-sm" role="button">users logs</a></li>
+{% endblock %}
+
+
+{% block content %}
+<script>
+    window.onload=function(){
+        var input=document.getElementById("in"),
+        s=document.getElementById("se");
+        s.onchange=function(){
+            input.value=this.value;
+        }
+    }
+    $(document).ready(function(){
+    $("#start").datepicker({ dateFormat: "yy/mm/dd" });
+    $("#end").datepicker({ dateFormat: "yy/mm/dd" });
+    });
+</script>
+
+<h2>Get X Logs</h2>
+<form action="{{ url_for('ol_loggingmanage_user') }}" method=post class=create-system>
+    <div class="input-group">
+        <span class="input-group-addon">username</span>
+        <input type="text" id="in" name=username>
+        <select id="se">
+            {% for u in users %}
+            <option value="{{ u }}">{{ u }}</option>
+            {% endfor %}
+        </select>
+        <span class="input-group-addon">usersystembelongto</span>
+        <input type="text" id="in" name=usersystembelongto>
+        <select id="se">
+            {% for s in systems %}
+            <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+        </select>
+        <span class="input-group-addon">userip</span>
+        <input type="text" id="in" name=userip>
+        <select id="se">
+            {% for s in ips %}
+            <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+        </select>
+
+        <span class="input-group-addon">starttime</span>
+        <input type="text" class="user-logs" name=starttime id="start">
+        <span class="input-group-addon">endtime</span>
+        <input type="text" class="user-logs" name=endtime id="end">
+    </div>
+
+    <input role="button" type=submit value="用户日志提交">
+</form>
+{% endblock %}

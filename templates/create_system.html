@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block nav_create_system %}
+        <li><a href="{{ url_for('ol_system_newone') }}" class="btn btn-success btn-sm" role="button">create new system</a></li>
+{% endblock %}
+
+
+
+{% block content %}
+<h2>Create New XSystem</h2>
+<form action="{{ url_for('ol_system_newone') }}" method=post class="form-horizontal" role="form">
+    <div class="panel panel-default">
+    <div class="panel-body">
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">SystemName</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="SystemName" name=systemname>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">AdminName</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="AdminName" name=systemadminorname>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">AdminPassword</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="AdminPassword" name=systempass>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="panel panel-default">
+    <div class="panel-body">
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">ALIVE TIME</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="2014/02/14,2014/03/25" value="2014/02/14,2014/03/25" name=systemavlietime>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">realname</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="AdminName" name=realname>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">mail</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="input" placeholder="AdminName" name=mail>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">phone</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="phone" name=phone>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">address</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="address" name=address>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="input" class="col-sm-2 control-label">remark</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="input" placeholder="remark" name=remark>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="panel panel-default">
+    <div class="panel-body">
+    <h3>CHOOSE PROGRAMS</h3>
+    {% for program in programs %}
+        {{ program.programname }}
+        {{ program._id}}
+        <input type="checkbox" name=programname value="{{ program._id }}" />
+        <br />
+    {% endfor %}
+    </div>
+    </div>
+    <input type=submit value="提交">
+    </div>
+</form>
+{% endblock %}
